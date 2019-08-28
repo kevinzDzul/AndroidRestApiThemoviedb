@@ -22,7 +22,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey",moviedb_ApiKey
+            resValue 'string', "api_key", moviedb_ApiKey
         }
+
+        debug {
+            buildConfigField 'String', "ApiKey", moviedb_ApiKey
+            resValue 'string', "api_key", moviedb_ApiKey
+        }
+
     }
     compileOptions {
         targetCompatibility 1.8

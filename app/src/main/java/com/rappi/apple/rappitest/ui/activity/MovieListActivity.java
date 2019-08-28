@@ -24,12 +24,11 @@ import com.rappi.apple.rappitest.mp.mapper.MapperPopularMovieUI;
 import com.rappi.apple.rappitest.mp.mapper.MapperTopMovieUI;
 import com.rappi.apple.rappitest.mp.mapper.MapperUpcomingMovieUI;
 import com.rappi.apple.rappitest.mp.model.MovieUI;
-import com.rappi.apple.rappitest.mp.presenter.categoryPresenter.UpcomingMoviesPresenter;
+import com.rappi.apple.rappitest.mp.presenter.categoryPresenter.MoviesPresenter;
 import com.rappi.apple.rappitest.repository.MovieRepositoryImpl;
 import com.rappi.apple.rappitest.repository.mapper.MapperPopularMovie;
 import com.rappi.apple.rappitest.repository.mapper.MapperTopMovie;
 import com.rappi.apple.rappitest.repository.mapper.MapperUpcommingMovie;
-import com.rappi.apple.rappitest.ui.activity.serializable.MovieSerializer;
 import com.rappi.apple.rappitest.ui.adapter.MovieListAdapter;
 import com.rappi.apple.rappitest.ui.contract.MovieListView;
 import com.rappi.apple.rappitest.ui.contract.SelectItemList;
@@ -54,7 +53,7 @@ public class MovieListActivity extends BaseActivity implements
     }
 
 
-    private UpcomingMoviesPresenter upcomingMoviesPresenter;//refactror
+    private MoviesPresenter moviesPresenter;//refactror
 
 
     private GetUpcomingMovieList getUpcomingMovieList;
@@ -114,7 +113,7 @@ public class MovieListActivity extends BaseActivity implements
         getTopRateMoviesList = new GetTopRateMoviesList(movieRepository);
         getPopularMoviesList = new GetPopularMoviesList(movieRepository);
 
-        upcomingMoviesPresenter = new UpcomingMoviesPresenter(
+        moviesPresenter = new MoviesPresenter(
                 getUpcomingMovieList,
                 mapperUpcomingMovieUI,
                 getPopularMoviesList,
@@ -122,13 +121,13 @@ public class MovieListActivity extends BaseActivity implements
                 getTopRateMoviesList,
                 mapperTopMovieUI,
                 this);
-        upcomingMoviesPresenter.setUpcominListView(this);
+        moviesPresenter.setUpcominListView(this);
 
 
 
         Intent intent = getIntent();
         int idCategory = intent.getIntExtra("CATEGORY",0);
-        upcomingMoviesPresenter.init(idCategory);
+        moviesPresenter.init(idCategory);
 
     }
 
@@ -180,18 +179,18 @@ public class MovieListActivity extends BaseActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        upcomingMoviesPresenter.resume();
+        moviesPresenter.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        upcomingMoviesPresenter.pause();
+        moviesPresenter.pause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        upcomingMoviesPresenter.destroy();
+        moviesPresenter.destroy();
     }
 }

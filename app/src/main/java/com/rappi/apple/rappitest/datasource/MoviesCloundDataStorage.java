@@ -1,5 +1,6 @@
 package com.rappi.apple.rappitest.datasource;
 
+import com.rappi.apple.rappitest.BuildConfig;
 import com.rappi.apple.rappitest.datasource.cache.MovieCache;
 import com.rappi.apple.rappitest.datasource.model.PopularMovieResponse;
 import com.rappi.apple.rappitest.datasource.model.TopRateMovieResponse;
@@ -23,7 +24,7 @@ public class MoviesCloundDataStorage  implements MoviesDataStore{
     @Override
     public Observable<PopularMovieResponse> popularListMovies() {
         MovieApiService popularMovieService = RetrofitInstance.getRetrofitInstance().create(MovieApiService.class);
-        return popularMovieService.getAllPopularMovies(1,"60a8a6574135b8eaee8c85e8e72500e2").doOnNext(new Consumer<PopularMovieResponse>() {
+        return popularMovieService.getAllPopularMovies(1, BuildConfig.ApiKey).doOnNext(new Consumer<PopularMovieResponse>() {
             @Override
             public void accept(PopularMovieResponse popularMovieResponses) throws Exception {
                 movieCache.putPopularMovies(popularMovieResponses);
@@ -34,7 +35,7 @@ public class MoviesCloundDataStorage  implements MoviesDataStore{
     @Override
     public Observable<TopRateMovieResponse> rateListMovies() {
         MovieApiService topMovieService = RetrofitInstance.getRetrofitInstance().create(MovieApiService.class);
-        return topMovieService.getAllTopMovies(1,"60a8a6574135b8eaee8c85e8e72500e2").doOnNext(new Consumer<TopRateMovieResponse>() {
+        return topMovieService.getAllTopMovies(1,BuildConfig.ApiKey).doOnNext(new Consumer<TopRateMovieResponse>() {
             @Override
             public void accept(TopRateMovieResponse topRateMovieResponses) throws Exception {
                 movieCache.putTopRateMovies(topRateMovieResponses);
@@ -46,7 +47,7 @@ public class MoviesCloundDataStorage  implements MoviesDataStore{
     public Observable<UpcomingMovieResponse> upcomingListMovies() {
         MovieApiService upcomingMovieService = RetrofitInstance.getRetrofitInstance().create(MovieApiService.class);
 
-        return upcomingMovieService.getAllUpcomingMovies(1,"60a8a6574135b8eaee8c85e8e72500e2").doOnNext(new Consumer<UpcomingMovieResponse>() {
+        return upcomingMovieService.getAllUpcomingMovies(1,BuildConfig.ApiKey).doOnNext(new Consumer<UpcomingMovieResponse>() {
             @Override
             public void accept(UpcomingMovieResponse upcomingMovieResponses) throws Exception {
                 movieCache.putUpcomingMovies(upcomingMovieResponses);

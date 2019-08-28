@@ -19,7 +19,7 @@ import com.rappi.apple.rappitest.mp.model.UpcomingMovieUI;
 import com.rappi.apple.rappitest.mp.presenter.Presenter;
 import com.rappi.apple.rappitest.ui.contract.MovieListView;
 
-public class UpcomingMoviesPresenter  implements Presenter{
+public class MoviesPresenter implements Presenter{
 
 
     private MovieListView movieListView;
@@ -35,7 +35,7 @@ public class UpcomingMoviesPresenter  implements Presenter{
 
     private final Context context;
 
-    public UpcomingMoviesPresenter(
+    public MoviesPresenter(
             GetUpcomingMovieList getUpcomingMovieList,
             MapperUpcomingMovieUI mapperUpcommingMovieUI,
 

@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+import com.rappi.apple.rappitest.Libs
+
+android {
+    compileSdkVersion BuildConfig.COMPILE_SDK_VERSION
+    defaultConfig {
+        applicationId BuildConfig.APPLICATION_ID
+        minSdkVersion BuildConfig.MIN_SDK_VERSION
+        targetSdkVersion BuildConfig.TARGET_SDK_VERSION
+        versionCode BuildConfig.VERSION_CODE
+        versionName BuildConfig.VERSION_NAME
+        testInstrumentationRunner BuildConfig.TEST_INSTRUMENTATION_RUNNER
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    packagingOptions {
+        pickFirst 'META-INF/**'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Libs.Android.APP_COMPAT
+    implementation Libs.UI.CONSTRAINT_LAYOUT
+
+    implementation Libs.NetWork.RETROFIT
+    implementation Libs.NetWork.RETROFIT_GSON
+
+    implementation Libs.UI.CONSTRAINT_LAYOUT
+    implementation Libs.UI.RECYCLER_VIEW
+    implementation Libs.UI.CARD_VIEW
+
+    implementation Libs.UI.GLIDE
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor Libs.UI.GLIDE_COMPILER
+
+    implementation Libs.DependencyInversion.BUTTERKNIFE
+    implementation Libs.DependencyInversion.BUTTERKNIFE_COMPILER
+
+    implementation Libs.Asynchronous.RX_JAVA
+    implementation Libs.Asynchronous.RX_JAVA_ADAPTER
+    implementation Libs.Asynchronous.RX_ANDROID
+
+
+    testImplementation Libs.Testing.JUNIT
+    androidTestImplementation Libs.Testing.RUNNER
+    androidTestImplementation Libs.Testing.ESPRESSO
+}
